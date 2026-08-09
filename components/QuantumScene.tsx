@@ -21,6 +21,7 @@ export const MicrotubuleTorus = ({
 }) => {
   const meshRef = useRef<THREE.InstancedMesh>(null!);
   const tempObject = useMemo(() => new THREE.Object3D(), []);
+  const timeRef = useRef(0);
 
   const cubes = useMemo(() => {
     const arr = [];
@@ -33,10 +34,11 @@ export const MicrotubuleTorus = ({
     return arr;
   }, [radius, count, offset]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (!meshRef.current) return;
 
-    const time = state.clock.getElapsedTime() * speed;
+    timeRef.current += delta * speed;
+    const time = timeRef.current;
 
     for (let i = 0; i < count; i++) {
       const cube = cubes[i];
