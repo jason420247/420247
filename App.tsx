@@ -5,7 +5,20 @@ export const TrinityKeystore = {
   getVector: () => {
     const salt = () => {
       const array = new Uint32Array(1);
-      (window.crypto || globalThis.crypto).getRandomValues(array);
+      const cryptoObj =
+        typeof window !== "undefined" && window.crypto
+          ? window.crypto
+          : typeof globalThis !== "undefined" && globalThis.crypto
+            ? globalThis.crypto
+            : undefined;
+
+      if (!cryptoObj || !cryptoObj.getRandomValues) {
+        throw new Error(
+          "Cryptographically secure random number generator is not available.",
+        );
+      }
+
+      cryptoObj.getRandomValues(array);
       return array[0].toString(36);
     };
     return {
