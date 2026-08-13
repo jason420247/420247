@@ -3,15 +3,17 @@ import React from "react";
 // --- 27D Trinity Keystore System ---
 export const TrinityKeystore = {
   getVector: () => {
-    const salt = () => {
-      const array = new Uint32Array(1);
-      (window.crypto || globalThis.crypto).getRandomValues(array);
-      return array[0].toString(36);
-    };
+    const array = new Uint32Array(3);
+    (typeof window !== "undefined" && window.crypto
+      ? window
+      : typeof globalThis !== "undefined" && globalThis.crypto
+        ? globalThis
+        : global
+    ).crypto.getRandomValues(array);
     return {
-      alpha: `α-${salt()}`,
-      beta: `β-${salt()}`,
-      gamma: `γ-${salt()}`,
+      alpha: `α-${array[0].toString(36)}`,
+      beta: `β-${array[1].toString(36)}`,
+      gamma: `γ-${array[2].toString(36)}`,
       parity: 0.9999,
     };
   },
