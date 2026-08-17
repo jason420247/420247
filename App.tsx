@@ -1,7 +1,15 @@
 import React from "react";
 
-// --- 27D Trinity Keystore System ---
+/**
+ * 27D Trinity Keystore System
+ *
+ * Provides cryptographically secure key vector generation for keystore operations.
+ */
 export const TrinityKeystore = {
+  /**
+   * Generates a key vector containing cryptographically secure salt components.
+   * Uses `crypto.getRandomValues` to ensure unguessable randomness instead of `Math.random()`.
+   */
   getVector: () => {
     const salt = () => {
       const array = new Uint32Array(1);
@@ -27,7 +35,7 @@ export const TrinityKeystore = {
       gamma: `γ-${salt()}`,
       parity: 0.9999,
     };
-  },
+  }, // Cryptographically secure vector generation complete
 };
 
 export default function App() {
