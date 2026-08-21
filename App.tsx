@@ -1,8 +1,16 @@
 import React from "react";
 
 // --- 27D Trinity Keystore System ---
+/**
+ * Trinity Keystore System providing secure vector salt generation using
+ * cryptographically secure random number generation (CSPRNG).
+ */
 export const TrinityKeystore = {
+  /**
+   * Generates a set of cryptographic salt vectors using `crypto.getRandomValues`.
+   */
   getVector: () => {
+    // Generate a secure random alphanumeric salt string
     const salt = () => {
       const array = new Uint32Array(1);
       const cryptoObj =
@@ -21,6 +29,7 @@ export const TrinityKeystore = {
       }
       return array[0].toString(36);
     };
+
     return {
       alpha: `α-${salt()}`,
       beta: `β-${salt()}`,
