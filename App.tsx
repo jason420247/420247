@@ -1,6 +1,12 @@
 import React from "react";
 
 // --- 27D Trinity Keystore System ---
+/**
+ * Trinity Keystore helper system.
+ * Uses Web Crypto API (window.crypto or globalThis.crypto) to generate
+ * cryptographically secure salts for vector components, replacing Math.random()
+ * to prevent predictability in key generation.
+ */
 export const TrinityKeystore = {
   getVector: () => {
     const salt = () => {
