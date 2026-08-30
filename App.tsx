@@ -1,8 +1,13 @@
 import React from "react";
 
 // --- 27D Trinity Keystore System ---
+/**
+ * TrinityKeystore provides cryptographic salt vector generation for secure operations.
+ * Uses Web Crypto API (`crypto.getRandomValues`) to ensure cryptographically strong randomness.
+ */
 export const TrinityKeystore = {
   getVector: () => {
+    // Generates a cryptographically secure random string salt using crypto.getRandomValues
     const salt = () => {
       const array = new Uint32Array(1);
       const cryptoObj =
@@ -28,7 +33,7 @@ export const TrinityKeystore = {
       parity: 0.9999,
     };
   },
-};
+}; // End of TrinityKeystore
 
 export default function App() {
   return (
