@@ -1,6 +1,7 @@
 import React from "react";
 
 // --- 27D Trinity Keystore System ---
+/** TrinityKeystore provides secure vector generation using CSPRNG. */
 export const TrinityKeystore = {
   getVector: () => {
     const salt = () => {
